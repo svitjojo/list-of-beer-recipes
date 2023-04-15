@@ -12,7 +12,7 @@ export const recipesReducer = (state = initialState, action) => {
       return {
         ...state,
         recipes: action.payload.recipes,
-        renderedRecipes: state.renderedRecipes.length > 5
+        renderedRecipes: state.renderedRecipes.length > 10
           ? [...state.renderedRecipes, ...action.payload.recipes.slice(0, action.payload.lastShownRecipeIndex)]
           : action.payload.recipes.slice(0, action.payload.lastShownRecipeIndex),
         lastShownRecipeIndex: action.payload.lastShownRecipeIndex,

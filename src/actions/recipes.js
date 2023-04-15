@@ -4,7 +4,7 @@ const ADD_RECIPE_TO_SELECTED = 'ADD_RECIPE_TO_SELECTED';
 const REMOVE_RECIPE_FROM_SELECTED = 'REMOVE_RECIPE_FROM_SELECTED';
 const REMOVE_RECIPES_FROM_RENDERED = 'REMOVE_RECIPES_FROM_RENDERED';
 
-export const fetchRecipes = (page = 1, endIndex = 5) => {
+export const fetchRecipes = (page = 1, endIndex = 10) => {
 	return async (dispatch) => {
 		try {
 			const response = await fetch(`https://api.punkapi.com/v2/beers?page=${page}`);
@@ -44,7 +44,16 @@ export const removeRecipeFromSelected = (id) => {
 
 export const removeRecipeFromRendered = (recipesToRemove) => async (dispatch, getState) => {
 	const state = getState();
-	const { lastShownRecipeIndex, page } = state;
+	const { lastShownRecipeIndex, page, renderedRecipes } = state;
+
+	if (!recipesToRemove) {
+		const firstFiveRecipes = renderedRecipes.slice(0, 5);
+
+		dispatch({ type: REMOVE_RECIPES_FROM_RENDERED, payload: firstFiveRecipes });
+
+		return;
+	}
+	
 	const numRecipesToRemove = recipesToRemove.length;
 
 	if (lastShownRecipeIndex + numRecipesToRemove > 25) {
