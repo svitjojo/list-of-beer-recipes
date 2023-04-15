@@ -37,11 +37,11 @@ export const HomePage = () => {
   return (
     <div>
       {!!selectedRecipes.length && (
-        <Button onClick={handleClick} className='m-3' style={{ position: 'fixed', top: 0 }}>Delete</Button>
+        <Button onClick={handleClick} className='m-3' style={{ position: 'fixed', top: 0, zIndex: 10 }}>Delete</Button>
       )}
 
       <Container className='mt-4'>
-        <Row xs={1} md={2} lg={1} className="g-4">
+        <Row xs={1} md={1} lg={1} className="g-4">
           {renderedRecipes.map((recipe) => (
             <Col key={recipe.id}>
               <RecipeCard recipe={recipe} />
