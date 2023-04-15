@@ -2,7 +2,8 @@ const initialState = {
   recipes: [],
   renderedRecipes: [],
   selectedRecipes: [],
-  shownRecipesIndex: 0
+  lastShownRecipeIndex: 0,
+  page: 1
 };
 
 export const recipesReducer = (state = initialState, action) => {
@@ -11,14 +12,17 @@ export const recipesReducer = (state = initialState, action) => {
       return {
         ...state,
         recipes: action.payload.recipes,
-        renderedRecipes: state.renderedRecipes.length > 5 ? [...state.renderedRecipes, ...action.payload.recipes.slice(0, action.payload.endIndex)] : action.payload.recipes.slice(0, action.payload.endIndex),
-        shownRecipesIndex: action.payload.endIndex,
+        renderedRecipes: state.renderedRecipes.length > 5
+          ? [...state.renderedRecipes, ...action.payload.recipes.slice(0, action.payload.lastShownRecipeIndex)]
+          : action.payload.recipes.slice(0, action.payload.lastShownRecipeIndex),
+        lastShownRecipeIndex: action.payload.lastShownRecipeIndex,
+        page: action.payload.page 
       };
     case 'ADD_RENDERED_RECIPES':
       return {
         ...state,
-        renderedRecipes: action.payload,
-        shownRecipesIndex: action.shownRecipesIndex
+        renderedRecipes: action.payload.renderedRecipes,
+        lastShownRecipeIndex: action.payload.lastShownRecipeIndex
       };
     case 'ADD_RECIPE_TO_SELECTED':
       return {
