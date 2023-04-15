@@ -1,5 +1,6 @@
 # Recipe List App
-This is a recipe list app built with React and Redux, using the Punk API as the data source. The app displays a list of recipes and allows the user to select and delete them, as well as navigate to a single recipe page.
+This is a recipe list app built with React and Redux, using the Punk API as the data source. The app displays a list of recipes and allows the user to select and delete them, as well as navigate to a single recipe page.<br/>
+[DEMO](https://svitjojo.github.io/list-of-beer-recipes/)
 
 ## Getting Started
 ### To get started with the project, clone the repository and install the dependencies:
